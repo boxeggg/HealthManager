@@ -2,9 +2,10 @@
 using MenedżerBadań.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace MenedżerBadań.Controllers
 {
-    public class MojeBadania : Controller
+    public class MyTests : Controller
     {
         private List<Badania> listaBadan = new List<Badania>()
         {
@@ -23,6 +24,10 @@ namespace MenedżerBadań.Controllers
             MojeBadaniaViewData vm = new MojeBadaniaViewData();
             vm.Badania = listaBadan;
             return View(vm);
+        }
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }
