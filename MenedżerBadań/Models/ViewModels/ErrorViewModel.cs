@@ -1,4 +1,4 @@
-namespace MenedżerBadań.Models
+namespace HealthManager.Models.ViewModels
 {
     public class ErrorViewModel
     {

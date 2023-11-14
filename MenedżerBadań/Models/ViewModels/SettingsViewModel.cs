@@ -1,4 +1,4 @@
-﻿namespace MenedżerBadań.ViewModels
+﻿namespace HealthManager.Models.ViewModels
 {
     public class SettingsViewModel
     {

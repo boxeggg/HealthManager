@@ -1,3 +1,4 @@
+using HealthManager.Data.Entities;
 using MenedżerBadań.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿using MenedżerBadań.Models;
+﻿using HealthManager.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
