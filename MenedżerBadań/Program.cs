@@ -1,4 +1,5 @@
 using HealthManager.Data.Entities;
+using HealthManager.Repositories;
 using MenedżerBadań.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddTransient<IMeasurementRepository, MeasurementRepository>();
 
 var app = builder.Build();
 

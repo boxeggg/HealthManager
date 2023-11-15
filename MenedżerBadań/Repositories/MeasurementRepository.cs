@@ -8,9 +8,10 @@ namespace HealthManager.Repositories
     public interface IMeasurementRepository
     {
         MeasurementEntity GetMeasurementById(int id);
-        MeasurementEntity DeleteMeasurement(int id);
-        MeasurementEntity InsertMeasurement(MeasurementEntity measurementEntity);
-        List<MeasurementEntity> GetAll();
+        bool DeleteMeasurement(int id);
+        bool AddMeasurement(MeasurementEntity measurementEntity);
+        bool UpdateMeasurement(MeasurementEntity measurementEntity);
+        List<MeasurementEntity> GetAllMeasurements();
     }
     public class MeasurementRepository : IMeasurementRepository
     {
@@ -19,30 +20,32 @@ namespace HealthManager.Repositories
         {
             _context = context;
         }
-
-        public MeasurementEntity DeleteMeasurement(int id)
+        public bool DeleteMeasurement(int id)
         {
-            throw new NotImplementedException();
+            var model = GetMeasurementById(id);
+            _context.MeasurementEntity.Add(model);
+            return _context.SaveChanges() > 0;
         }
 
-        public List<MeasurementEntity> GetAll()
+        public List<MeasurementEntity> GetAllMeasurements()
         {
-            throw new NotImplementedException();
+            return _context.MeasurementEntity.Select(n => n).ToList();
         }
 
         public MeasurementEntity GetMeasurementById(int id)
         {
-            throw new NotImplementedException();
+            return _context.MeasurementEntity.FirstOrDefault(n => n.Id == id);
         }
 
-        public MeasurementEntity GetTaskById(int id)
+        public bool AddMeasurement(MeasurementEntity model)
         {
-            throw new NotImplementedException();
+            _context.MeasurementEntity.Add(model);
+            return _context.SaveChanges() > 0;
         }
-
-        public MeasurementEntity InsertMeasurement(MeasurementEntity measurementEntity)
+        public bool UpdateMeasurement(MeasurementEntity model)
         {
-            throw new NotImplementedException();
+            _context.MeasurementEntity.Update(model);
+            return _context.SaveChanges() > 0;
         }
     }
 }
