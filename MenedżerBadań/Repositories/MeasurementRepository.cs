@@ -23,7 +23,7 @@ namespace HealthManager.Repositories
         public bool DeleteMeasurement(int id)
         {
             var model = GetMeasurementById(id);
-            _context.MeasurementEntity.Add(model);
+            _context.MeasurementEntity.Remove(model);
             return _context.SaveChanges() > 0;
         }
 
