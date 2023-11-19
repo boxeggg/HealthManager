@@ -16,7 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddTransient<IMeasurementRepository, MeasurementRepository>();
-
+builder.Services.AddTransient<IDeviceRepository, DeviceRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
