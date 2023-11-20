@@ -1,9 +1,9 @@
-﻿
-using HealthManager.Data.Entities;
+﻿using HealthManager.Data.Entities;
 using HealthManager.Repositories;
 using MenedżerBadań.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HealthManager.Models.ViewModels;
 
 namespace HealthManager.Controllers
 {
@@ -21,7 +21,9 @@ namespace HealthManager.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(_repo.GetAllMeasurements());
+            var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
+            var userId = user.Id;
+            return View(_repo.GetAllMeasurements(userId));
         }
 
         [HttpGet]
@@ -42,17 +44,19 @@ namespace HealthManager.Controllers
             return View();
         }
 
-   
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DateTime,Comment,Value")] MeasurementEntity measurementEntity)
         {
 
-            _repo.AddMeasurement(measurementEntity);
+            var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
+            var userId = user.Id;
+            _repo.AddMeasurement(userId, measurementEntity);
 
-             return RedirectToAction(nameof(Index));
-            
-            
+            return RedirectToAction(nameof(Index));
+
+
         }
 
         [HttpGet]
@@ -81,28 +85,28 @@ namespace HealthManager.Controllers
                 return NotFound();
             }
             _repo.UpdateMeasurement(measurementEntity);
-             return RedirectToAction(nameof(Index));
-            }
-           
-        
+            return RedirectToAction(nameof(Index));
+        }
 
-        
+
+
+
         public async Task<IActionResult> Delete(int id)
         {
-                if (id == null || _context.MeasurementEntity == null)
-                {
-                    return NotFound();
-                }
-
-            
-                var measurementEntity =  _repo.GetMeasurementById(id);
- 
-
-                return View(measurementEntity);
+            if (id == null || _context.MeasurementEntity == null)
+            {
+                return NotFound();
             }
 
 
-            
+            var measurementEntity = _repo.GetMeasurementById(id);
+
+
+            return View(measurementEntity);
+        }
+
+
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

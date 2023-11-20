@@ -9,9 +9,9 @@ namespace HealthManager.Repositories
     {
         MeasurementEntity GetMeasurementById(int id);
         bool DeleteMeasurement(int id);
-        bool AddMeasurement(MeasurementEntity measurementEntity);
+        bool AddMeasurement(string userId, MeasurementEntity measurementEntity);
         bool UpdateMeasurement(MeasurementEntity measurementEntity);
-        List<MeasurementEntity> GetAllMeasurements();
+        List<MeasurementEntity> GetAllMeasurements(string id);
     }
     public class MeasurementRepository : IMeasurementRepository
     {
@@ -27,9 +27,10 @@ namespace HealthManager.Repositories
             return _context.SaveChanges() > 0;
         }
 
-        public List<MeasurementEntity> GetAllMeasurements()
+        public List<MeasurementEntity> GetAllMeasurements(string id)
         {
-            return _context.MeasurementEntity.Select(n => n).ToList();
+ 
+            return _context.MeasurementEntity.Where(n => n.UserId == id).ToList();
         }
 
         public MeasurementEntity GetMeasurementById(int id)
@@ -37,8 +38,11 @@ namespace HealthManager.Repositories
             return _context.MeasurementEntity.FirstOrDefault(n => n.Id == id);
         }
 
-        public bool AddMeasurement(MeasurementEntity model)
+        public bool AddMeasurement(string userId, MeasurementEntity model)
         {
+
+            var user = _context.Users.Find(userId);
+            model.User = user;
             _context.MeasurementEntity.Add(model);
             return _context.SaveChanges() > 0;
         }
