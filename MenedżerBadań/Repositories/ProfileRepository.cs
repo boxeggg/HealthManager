@@ -7,6 +7,7 @@ namespace HealthManager.Repositories
     {
         bool AddProfile(string userId, ProfileEntity profileEntity);
         bool UpdateProfile(ProfileEntity profileEntity);
+        ProfileEntity GetProfileByUserId(string id);
 
     }
 
@@ -19,7 +20,12 @@ namespace HealthManager.Repositories
             _context = context;
         }
 
+        public ProfileEntity GetProfileByUserId(string userId)
+        {
+            var user = userId;
+            return _context.ProfileEntity.FirstOrDefault(n => n.UserId == userId);
 
+        }
         public bool AddProfile(string userId, ProfileEntity model)
         {
             

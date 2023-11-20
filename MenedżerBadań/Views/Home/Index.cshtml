@@ -7,7 +7,7 @@
     @if(Model.Profile != null && Model.Profile != null)
     {
         <h1 class="display-4">Witaj @Model.Profile.FirstName @Model.Profile.LastName </h1>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Create">Kliknij aby skonfigurować</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Edit">Konfiguruj profil</a>
     }
     else
     {
