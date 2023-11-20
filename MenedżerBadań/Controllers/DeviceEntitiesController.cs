@@ -1,7 +1,13 @@
-﻿using HealthManager.Data.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using HealthManager.Data.Entities;
 using HealthManager.Repositories;
 using MenedżerBadań.Data;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HealthManager.Controllers
 {
@@ -30,8 +36,8 @@ namespace HealthManager.Controllers
                 return NotFound();
             }
 
-            var deviceEntity = _repo.GetDeviceById(id);
-            return View(deviceEntity);
+
+            return View(_repo.GetDeviceById(id));
         }
 
         [HttpGet]
@@ -40,34 +46,31 @@ namespace HealthManager.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateTime,Comment,Value")] DeviceEntity deviceEntity)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,CanSaveMeasures,NeedConnection")] DeviceEntity deviceEntity)
         {
+
             _repo.AddDevice(deviceEntity);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.DeviceEntity == null)
             {
                 return NotFound();
             }
 
-            var deviceEntity = await _context.DeviceEntity.FindAsync(id);
-            if (deviceEntity == null)
-            {
-                return NotFound();
-            }
-
-            return View(deviceEntity);
+            return View(_repo.GetDeviceById(id));
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,Comment,Value")] DeviceEntity deviceEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,CanSaveMeasures,NeedConnection")] DeviceEntity deviceEntity)
         {
             if (id != deviceEntity.Id)
             {
@@ -75,9 +78,11 @@ namespace HealthManager.Controllers
             }
 
             _repo.UpdateDevice(deviceEntity);
+
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == null || _context.DeviceEntity == null)
@@ -85,9 +90,9 @@ namespace HealthManager.Controllers
                 return NotFound();
             }
 
-            var deviceEntity = _repo.GetDeviceById(id);
-            return View(deviceEntity);
+            return View(_repo.GetDeviceById(id));
         }
+
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -95,11 +100,17 @@ namespace HealthManager.Controllers
         {
             if (_context.DeviceEntity == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.DeviceEntity' is null.");
+                return Problem("Entity set 'ApplicationDbContext.Device'  is null.");
             }
 
             _repo.DeleteDevice(id);
+
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool DeviceEntityExists(int id)
+        {
+          return (_context.DeviceEntity?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
