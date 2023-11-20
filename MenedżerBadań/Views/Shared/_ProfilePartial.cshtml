@@ -1,0 +1,17 @@
+﻿@* @model HealthManager.Models.ViewModels.HomeViewModel
+<ul class="navbar-nav">
+    @if (Model.Profile != null && Model.Profile != null)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identit" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        </li>
+
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link btn disabled">Mój profil</a>
+        </li>
+    }
+
+</ul> *@
