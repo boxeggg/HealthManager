@@ -23,7 +23,15 @@ namespace HealthManager.Controllers
         {
             var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
             var userId = user.Id;
-            return View(_repo.GetAllMeasurements(userId));
+            List<MeasurementsViewModel> vm = _repo.GetAllMeasurements(userId).Select(i => new MeasurementsViewModel()
+            {
+                DateTime = i.DateTime,
+                Comment = i.Comment,
+                Value = i.Value,
+                Id = i.Id
+
+            }).ToList();
+            return View(vm);
         }
 
         [HttpGet]
@@ -33,14 +41,32 @@ namespace HealthManager.Controllers
             {
                 return NotFound();
             }
-
             var measurementEntity = _repo.GetMeasurementById(id);
-            return View(measurementEntity);
+            MeasurementsViewModel vm = new MeasurementsViewModel()
+            {
+                DateTime = measurementEntity.DateTime,
+                Comment = measurementEntity.Comment,
+                Value = measurementEntity.Value,
+                Id = measurementEntity.Id
+
+            };
+            return View(vm);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(MeasurementsViewModel measurementEntity)
         {
+           
+            MeasurementsViewModel vm = new MeasurementsViewModel()
+            {
+                DateTime = measurementEntity.DateTime,
+                Comment = measurementEntity.Comment,
+                Value = measurementEntity.Value,
+                Id = measurementEntity.Id,
+                UserId = measurementEntity.UserId
+                
+
+            };
             return View();
         }
 
@@ -60,25 +86,28 @@ namespace HealthManager.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.MeasurementEntity == null)
             {
                 return NotFound();
             }
-
-            var measurementEntity = await _context.MeasurementEntity.FindAsync(id);
-            if (measurementEntity == null)
+            var measurementEntity = _repo.GetMeasurementById(id);       
+            MeasurementsViewModel vm = new MeasurementsViewModel()
             {
-                return NotFound();
-            }
-            return View(measurementEntity);
+                DateTime = measurementEntity.DateTime,
+                Comment = measurementEntity.Comment,
+                Value = measurementEntity.Value,
+                Id = measurementEntity.Id,
+                UserId = measurementEntity.UserId
+            };
+            return View(vm);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,Comment,Value")] MeasurementEntity measurementEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,Comment,Value,UserId")] MeasurementEntity measurementEntity)
         {
             if (id != measurementEntity.Id)
             {
@@ -100,9 +129,17 @@ namespace HealthManager.Controllers
 
 
             var measurementEntity = _repo.GetMeasurementById(id);
+            MeasurementsViewModel vm = new MeasurementsViewModel()
+            {
+                DateTime = measurementEntity.DateTime,
+                Comment = measurementEntity.Comment,
+                Value = measurementEntity.Value,
+                Id = measurementEntity.Id,
+                UserId = measurementEntity.UserId
+            };
 
 
-            return View(measurementEntity);
+            return View(vm);
         }
 
 
