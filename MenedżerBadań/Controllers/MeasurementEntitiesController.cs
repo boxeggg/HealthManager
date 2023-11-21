@@ -67,7 +67,7 @@ namespace HealthManager.Controllers
                 
 
             };
-            return View();
+            return View(vm);
         }
 
 

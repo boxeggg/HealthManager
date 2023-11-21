@@ -1,4 +1,5 @@
 ﻿using HealthManager.Data.Entities;
+using HealthManager.Models.ViewModels;
 using HealthManager.Repositories;
 using MenedżerBadań.Controllers;
 using MenedżerBadań.Data;
@@ -23,21 +24,41 @@ namespace HealthManager.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(ProfileViewModel ProfileEntity)
         {
             if (ProfileEntityExists())
             {
                 return NotFound();
             }
+            ProfileViewModel vm = new ProfileViewModel()
+            {
+                FirstName = ProfileEntity.FirstName,
+                LastName = ProfileEntity.LastName,
+                Height = ProfileEntity.Height,
+                Weight = ProfileEntity.Weight,
+                BloodType = ProfileEntity.BloodType,
 
-            return View();
+            };
+            return View(vm);
         }
         [HttpGet]
         public IActionResult Edit()
         {
             var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
             var userId = user.Id;
-            return View(_repo.GetProfileByUserId(userId));
+            var profileEntity = _repo.GetProfileByUserId(userId);
+            ProfileViewModel vm = new ProfileViewModel()
+            {
+                FirstName = profileEntity.FirstName,
+                LastName = profileEntity.LastName,
+                Height = profileEntity.Height,
+                Weight = profileEntity.Weight,
+                BloodType = profileEntity.BloodType,
+                UserId = profileEntity.UserId,
+                Id = profileEntity.Id
+
+            };
+            return View(vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
