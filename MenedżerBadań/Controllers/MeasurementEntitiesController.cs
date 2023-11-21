@@ -1,6 +1,6 @@
 ﻿using HealthManager.Data.Entities;
 using HealthManager.Repositories;
-using MenedżerBadań.Data;
+using HealthManager.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthManager.Models.ViewModels;

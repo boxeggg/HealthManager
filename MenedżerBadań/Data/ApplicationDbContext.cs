@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MenedżerBadań.Data
+namespace HealthManager.Data
 {
     public class ApplicationDbContext : IdentityDbContext<UserEntity>
     {

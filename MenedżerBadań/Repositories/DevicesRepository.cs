@@ -1,5 +1,6 @@
 ﻿using HealthManager.Data.Entities;
-using MenedżerBadań.Data;
+using HealthManager.Data;
+
 
 namespace HealthManager.Repositories
 {

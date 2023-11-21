@@ -1,7 +1,7 @@
 ﻿using HealthManager.Data.Entities;
 using System.Diagnostics.Metrics;
 
-using MenedżerBadań.Data;
+using HealthManager.Data;
 
 namespace HealthManager.Repositories
 {

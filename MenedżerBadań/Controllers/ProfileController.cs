@@ -1,8 +1,7 @@
 ﻿using HealthManager.Data.Entities;
 using HealthManager.Models.ViewModels;
 using HealthManager.Repositories;
-using MenedżerBadań.Controllers;
-using MenedżerBadań.Data;
+using HealthManager.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;

@@ -1,7 +1,6 @@
 using HealthManager.Data.Entities;
 using HealthManager.Repositories;
-using MenedżerBadań.Data;
-using Microsoft.AspNetCore.Identity;
+using HealthManager.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
