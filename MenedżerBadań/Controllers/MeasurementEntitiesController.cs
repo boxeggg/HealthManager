@@ -4,9 +4,11 @@ using HealthManager.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthManager.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthManager.Controllers
 {
+    [Authorize]
     public class MeasurementEntitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,8 +30,9 @@ namespace HealthManager.Controllers
                 DateTime = i.DateTime,
                 Comment = i.Comment,
                 Value = i.Value,
-                Id = i.Id
-
+                Id = i.Id,
+                Name = i.Name
+                
             }).ToList();
             return View(vm);
         }
@@ -47,7 +50,8 @@ namespace HealthManager.Controllers
                 DateTime = measurementEntity.DateTime,
                 Comment = measurementEntity.Comment,
                 Value = measurementEntity.Value,
-                Id = measurementEntity.Id
+                Id = measurementEntity.Id,
+                Name = measurementEntity.Name
 
             };
             return View(vm);
@@ -63,8 +67,9 @@ namespace HealthManager.Controllers
                 Comment = measurementEntity.Comment,
                 Value = measurementEntity.Value,
                 Id = measurementEntity.Id,
-                UserId = measurementEntity.UserId
-                
+                UserId = measurementEntity.UserId,
+                Name = measurementEntity.Name
+
 
             };
             return View(vm);
@@ -73,7 +78,7 @@ namespace HealthManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateTime,Comment,Value")] MeasurementEntity measurementEntity)
+        public async Task<IActionResult> Create([Bind("Id,DateTime,Comment,Value,Name")] MeasurementEntity measurementEntity)
         {
 
             var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
@@ -99,7 +104,8 @@ namespace HealthManager.Controllers
                 Comment = measurementEntity.Comment,
                 Value = measurementEntity.Value,
                 Id = measurementEntity.Id,
-                UserId = measurementEntity.UserId
+                UserId = measurementEntity.UserId,
+                Name = measurementEntity.Name
             };
             return View(vm);
         }
@@ -107,7 +113,7 @@ namespace HealthManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,Comment,Value,UserId")] MeasurementEntity measurementEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DateTime,Comment,Value,UserId,Name")] MeasurementEntity measurementEntity)
         {
             if (id != measurementEntity.Id)
             {
@@ -135,7 +141,8 @@ namespace HealthManager.Controllers
                 Comment = measurementEntity.Comment,
                 Value = measurementEntity.Value,
                 Id = measurementEntity.Id,
-                UserId = measurementEntity.UserId
+                UserId = measurementEntity.UserId,
+                Name = measurementEntity.Name
             };
 
 

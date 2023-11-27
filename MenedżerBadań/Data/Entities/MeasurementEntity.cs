@@ -3,12 +3,24 @@
     public class MeasurementEntity
     {
         public int Id { get; set; }
-        public 
+        public BodyMeasure Name { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
         public string? Comment { get; set; }
         public int Value { get; set; }
         public UserEntity User { get; set; }
         public string UserId { get; set; }
 
+    }
+    public enum BodyMeasure
+    {
+        Pulse,
+        Saturation,
+        Weight,
+        Height,
+        Glucose,
+        BloodType,
+        Observation,
+        Accident,
+        Procedure,
     }
 }

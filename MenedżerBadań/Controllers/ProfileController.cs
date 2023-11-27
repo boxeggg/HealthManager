@@ -5,9 +5,11 @@ using HealthManager.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthManager.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller { 
     private readonly ApplicationDbContext _context;
     private readonly IProfileRepository _repo;
