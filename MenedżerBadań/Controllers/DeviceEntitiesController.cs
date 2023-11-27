@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HealthManager.Data.Entities;
 using HealthManager.Repositories;
 using HealthManager.Data;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace HealthManager.Controllers
 {
+    [Authorize]
     public class DeviceEntitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
