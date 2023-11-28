@@ -6,5 +6,6 @@ namespace HealthManager.Models.ViewModels
     {
         public UserEntity User { get; set; }
         public ProfileEntity Profile { get; set; }
+
     }
 }

@@ -6,8 +6,8 @@ public class ProfileEntity
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public float Weight { get; set; }
-    public float Height { get; set; }
+    public double Weight { get; set; }
+    public double Height { get; set; }
     public BloodType? BloodType { get; set; }
     public UserEntity User { get; set; }
     public string UserId { get; set; }

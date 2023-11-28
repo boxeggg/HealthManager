@@ -8,13 +8,18 @@
     {
         <h1 class="display-4">Witaj @Model.Profile.FirstName @Model.Profile.LastName </h1>
         <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Edit">Konfiguruj profil</a>
+        <div id="bmiZone">
+        </div>
     }
     else
     {
         <h1>Nie masz jeszcze profilu.</h1>
         <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Create">Kliknij aby skonfigurować</a>
-    }
-
-<p>  </p>
-    
+    }    
 </div>
+@section Scripts{
+    <script>
+        $('#bmiZone').load("/Home/Bmi")
+    </script>
+
+}

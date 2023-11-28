@@ -31,7 +31,25 @@ namespace MenedżerBadań.Controllers
                 
             });
           
-        
+        }
+        public IActionResult Bmi()
+        {
+            var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
+            var profile = _context.ProfileEntity.FirstOrDefault(n => n.UserId == user.Id);
+            _BmiViewModel vm = new _BmiViewModel() { 
+                bmiResult = CalculateBmi(profile.Weight,profile.Height)
+            };
+            return PartialView("_Bmi", vm);
+        }
+        private double CalculateBmi(double weight,double height)
+        {
+            if (height <= 0 || weight <= 0)
+            {
+                return -1; 
+            }
+
+            double bmi = weight / (height * height);
+            return Math.Round(bmi, 2);
         }
 
         public IActionResult Privacy()

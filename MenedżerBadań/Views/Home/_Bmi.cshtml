@@ -1,4 +1,80 @@
-﻿@model HealthManager.Models.ViewModels.HomeViewModel;
+﻿@model HealthManager.Models.ViewModels._BmiViewModel;
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="card" style="width: 30%;">
+    <div class="card-header">
+        Moje BMI
+    </div>
+    @if(Model.bmiResult < 16.0){
+        <div class="card-body" style="background-color: red; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - WYGŁODZENIE</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 17.0)
+    {
+        <div class="card-body" style="background-color: red; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - WYCHUDZENIE</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 18.50)
+    {
+        <div class="card-body" style="background-color: orange; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - NIEDOWAGA</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 25.0)
+    {
+        <div class="card-body" style="background-color: green; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - Poprawna masa ciała</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 30.0)
+    {
+        <div class="card-body" style="background-color: orange; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - NADWAGA</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 35.0)
+    {
+        <div class="card-body" style="background-color: red; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - OTYŁOŚĆ</p>
+
+            </blockquote>
+        </div>
+    }
+    else if (Model.bmiResult < 40.0)
+    {
+        <div class="card-body" style="background-color: red; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - OTYŁOŚĆ DUŻA</p>
+
+            </blockquote>
+        </div>
+    }
+    else 
+    {
+        <div class="card-body" style="background-color: red; color: white;">
+            <blockquote class="blockquote mb-0">
+                <p> @Model.bmiResult - OTYŁOŚĆ OLBRZYMIA</p>
+
+            </blockquote>
+        </div>
+    }
+</div>
