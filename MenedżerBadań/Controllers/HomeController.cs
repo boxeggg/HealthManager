@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using HealthManager.Data.Entities;
+using HealthManager.Repositories;
 
 namespace MenedżerBadań.Controllers
 {
@@ -12,8 +13,10 @@ namespace MenedżerBadań.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+        private readonly IMeasurementRepository _repo;
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IMeasurementRepository repo)
         {
+            _repo = repo;
             _context = context;
             _logger = logger;
         }
@@ -41,16 +44,30 @@ namespace MenedżerBadań.Controllers
             };
             return PartialView("_Bmi", vm);
         }
-        private double CalculateBmi(double weight,double height)
+        private double CalculateBmi(double weight, double height)
         {
             if (height <= 0 || weight <= 0)
             {
-                return -1; 
+                return -1;
             }
 
             double bmi = weight / (height * height);
             return Math.Round(bmi, 2);
         }
+        public IActionResult MyMeasurements()
+        {
+            var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
+            _MyMeasurementsViewModel vm = new _MyMeasurementsViewModel()
+            {
+                PulseValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Pulse),
+                GlucoseValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Glucose),
+                HeightValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Height),
+                WeightValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Weight),
+                SaturationValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Saturation)
+            };
+            return PartialView("_MyMeasurements",vm);
+        }
+
 
         public IActionResult Privacy()
         {

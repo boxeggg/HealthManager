@@ -11,6 +11,7 @@ namespace HealthManager.Repositories
         bool DeleteMeasurement(int id);
         bool AddMeasurement(string userId, MeasurementEntity measurementEntity);
         bool UpdateMeasurement(MeasurementEntity measurementEntity);
+        float GetMeasurementValueByName(string userId, BodyMeasure measurementName);
         List<MeasurementEntity> GetAllMeasurements(string id);
     }
     public class MeasurementRepository : IMeasurementRepository
@@ -36,6 +37,12 @@ namespace HealthManager.Repositories
         public MeasurementEntity GetMeasurementById(int id)
         {
             return _context.MeasurementEntity.FirstOrDefault(n => n.Id == id);
+        }
+        public float GetMeasurementValueByName(string userId, BodyMeasure measurementName)
+        {
+            var measurement = _context.MeasurementEntity
+                    .OrderByDescending(n => n.DateTime).FirstOrDefault(n => n.UserId == userId && n.Name == measurementName);
+            return measurement?.Value ?? -1; 
         }
 
         public bool AddMeasurement(string userId, MeasurementEntity model)

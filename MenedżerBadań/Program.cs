@@ -2,6 +2,7 @@ using HealthManager.Data.Entities;
 using HealthManager.Repositories;
 using HealthManager.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 

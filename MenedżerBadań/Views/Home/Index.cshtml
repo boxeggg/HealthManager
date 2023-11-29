@@ -10,6 +10,8 @@
         <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Edit">Konfiguruj profil</a>
         <div id="bmiZone">
         </div>
+        <div id="myMeasurements">
+        </div>
     }
     else
     {
@@ -20,6 +22,7 @@
 @section Scripts{
     <script>
         $('#bmiZone').load("/Home/Bmi")
+        $('#myMeasurements').load("/Home/MyMeasurements")
     </script>
 
 }
