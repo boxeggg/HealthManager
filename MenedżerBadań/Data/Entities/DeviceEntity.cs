@@ -7,5 +7,7 @@
         public string? Description { get; set; }
         public bool CanSaveMeasures { get; set; }
         public bool NeedConnection { get; set; }
+        public UserEntity User { get; set; }
+        public string UserId { get; set; }
     }
 }

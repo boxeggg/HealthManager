@@ -10,6 +10,7 @@ public class UserEntity : IdentityUser
     public ProfileEntity? Profile { get; set; }
     public int ProfileID { get; set; }
     public ICollection<MeasurementEntity>? Measurements { get; set; }
+    public ICollection<DeviceEntity>? Devices { get; set; }
 }
 
 public enum UserTypeEnum

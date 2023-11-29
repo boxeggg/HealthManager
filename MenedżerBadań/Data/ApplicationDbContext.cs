@@ -20,6 +20,7 @@ namespace HealthManager.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<UserEntity>().HasMany(n => n.Measurements).WithOne(n => n.User).HasForeignKey(n => n.UserId);
+            builder.Entity<UserEntity>().HasMany(n => n.Devices).WithOne(n => n.User).HasForeignKey(n => n.UserId);
             builder.Entity<UserEntity>().HasOne(n => n.Profile).WithOne(n => n.User).HasForeignKey<ProfileEntity>(n => n.UserId);
         }
 

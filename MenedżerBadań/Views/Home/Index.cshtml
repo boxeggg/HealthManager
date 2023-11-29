@@ -4,7 +4,7 @@
 }
 
 <div class="text-center">
-    @if(Model.Profile != null && Model.Profile != null)
+    @if(Model.Profile != null )
     {
         <h1 class="display-4">Witaj @Model.Profile.FirstName @Model.Profile.LastName </h1>
         <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Edit">Konfiguruj profil</a>
