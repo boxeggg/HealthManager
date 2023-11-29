@@ -2,15 +2,16 @@
 using HealthManager.Data;
 
 
+
 namespace HealthManager.Repositories
 {
     public interface IDeviceRepository
     {
         DeviceEntity GetDeviceById(int id);
         bool DeleteDevice(int id);
-        bool AddDevice(DeviceEntity deviceEntity);
+        bool AddDevice(string userId, DeviceEntity deviceEntity);
         bool UpdateDevice(DeviceEntity deviceEntity);
-        List<DeviceEntity> GetAllDevices();
+        List<DeviceEntity> GetAllDevices(string id);
     }
 
     public class DeviceRepository : IDeviceRepository
@@ -29,9 +30,9 @@ namespace HealthManager.Repositories
             return _context.SaveChanges() > 0;
         }
 
-        public List<DeviceEntity> GetAllDevices()
+        public List<DeviceEntity> GetAllDevices(string id)
         {
-            return _context.DeviceEntity.Select(n => n).ToList();
+            return _context.DeviceEntity.Where(n => n.UserId == id).ToList();
         }
 
         public DeviceEntity GetDeviceById(int id)
@@ -39,8 +40,10 @@ namespace HealthManager.Repositories
             return _context.DeviceEntity.FirstOrDefault(n => n.Id == id);
         }
 
-        public bool AddDevice(DeviceEntity model)
+        public bool AddDevice(string userId, DeviceEntity model)
         {
+            var user = _context.Users.Find(userId);
+            model.User = user;
             _context.DeviceEntity.Add(model);
             return _context.SaveChanges() > 0;
         }

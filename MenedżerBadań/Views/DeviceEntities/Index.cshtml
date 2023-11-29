@@ -1,13 +1,15 @@
-﻿@model IEnumerable<HealthManager.Data.Entities.DeviceEntity>
+﻿@using HealthManager.Models.ViewModels;
+@model IEnumerable<DevicesViewModel>
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Moje urządzenia</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Sparuj nowe urządzenie</a>
 </p>
 <table class="table">
     <thead>
@@ -24,6 +26,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.NeedConnection)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -42,10 +45,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NeedConnection)
             </td>
+
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-regular fa-pen-to-square" style="color: #a4138a;"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-list" style="color: #a4138a;"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash" style="color: #a4138a;"></i></a>
             </td>
         </tr>
 }
