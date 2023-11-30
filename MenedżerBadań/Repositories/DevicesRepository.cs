@@ -12,6 +12,7 @@ namespace HealthManager.Repositories
         bool AddDevice(string userId, DeviceEntity deviceEntity);
         bool UpdateDevice(DeviceEntity deviceEntity);
         List<DeviceEntity> GetAllDevices(string id);
+        List<string> GetConnectedDeviceNames(string id);
     }
 
     public class DeviceRepository : IDeviceRepository
@@ -52,6 +53,13 @@ namespace HealthManager.Repositories
         {
             _context.DeviceEntity.Update(model);
             return _context.SaveChanges() > 0;
+        }
+        public List<string> GetConnectedDeviceNames(string id)
+        {
+            return _context.DeviceEntity
+                .Where(n => n.UserId == id && n.NeedConnection)
+                .Select(n => n.Name)
+                .ToList();
         }
     }
 }

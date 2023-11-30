@@ -1,0 +1,24 @@
+﻿@model HealthManager.Models.ViewModels._ConnectedDevicesViewModel;
+@{
+    ViewData["Title"] = "Devices";
+}
+<div class="container mt-4">
+
+
+    <table class="table table-bordered" style="width: 50%">
+        <thead>
+            <tr style="background-color: red; border-color: black">
+                <th scope="col">Połączone urządzenia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i = 0; i<Model.Name.Count;i++){
+            <tr style="background-color: white; border-color: black">
+              <b> <td style="color: black"> @Model.Name[i] </td> 
+            </tr>
+           }
+
+        </tbody>
+    </table>
+
+</div>

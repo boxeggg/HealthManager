@@ -13,12 +13,14 @@ namespace MenedżerBadań.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        private readonly IMeasurementRepository _repo;
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IMeasurementRepository repo)
+        private readonly IMeasurementRepository _Mrepo;
+        private readonly IDeviceRepository _Drepo;
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IMeasurementRepository Mrepo, IDeviceRepository Drepo)
         {
-            _repo = repo;
+            _Mrepo = Mrepo;
             _context = context;
             _logger = logger;
+            _Drepo = Drepo;
         }
          
 
@@ -59,13 +61,24 @@ namespace MenedżerBadań.Controllers
             var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
             _MyMeasurementsViewModel vm = new _MyMeasurementsViewModel()
             {
-                PulseValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Pulse),
-                GlucoseValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Glucose),
-                HeightValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Height),
-                WeightValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Weight),
-                SaturationValue = _repo.GetMeasurementValueByName(user.Id, BodyMeasure.Saturation)
+                PulseValue = _Mrepo.GetMeasurementValueByName(user.Id, BodyMeasure.Pulse),
+                GlucoseValue = _Mrepo.GetMeasurementValueByName(user.Id, BodyMeasure.Glucose),
+                HeightValue = _Mrepo.GetMeasurementValueByName(user.Id, BodyMeasure.Height),
+                WeightValue = _Mrepo.GetMeasurementValueByName(user.Id, BodyMeasure.Weight),
+                SaturationValue = _Mrepo.GetMeasurementValueByName(user.Id, BodyMeasure.Saturation)
             };
             return PartialView("_MyMeasurements",vm);
+        }
+        public IActionResult ConnectedDevices()
+        {
+            var user = _context.UserEntity.FirstOrDefault(n => n.UserName == User.Identity.Name);
+            var userId = user.Id;
+            _ConnectedDevicesViewModel vm = new _ConnectedDevicesViewModel() {
+                Name = _Drepo.GetConnectedDeviceNames(userId)
+            };
+
+
+            return PartialView("_ConnectedDevices",vm);
         }
 
 

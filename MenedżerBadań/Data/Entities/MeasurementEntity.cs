@@ -16,14 +16,23 @@ namespace HealthManager.Data.Entities
     }
     public enum BodyMeasure
     {
+        [Display(Name="Puls")]
         Pulse,
+        [Display(Name = "Saturacja")]
         Saturation,
+        [Display(Name = "Waga")]
         Weight,
+        [Display(Name = "Wzrost")]
         Height,
+        [Display(Name = "Poziom glukozy")]
         Glucose,
+        [Display(Name = "Typ krwi")]
         BloodType,
+        [Display(Name = "Obseracja")]
         Observation,
+        [Display(Name = "Wypadek")]
         Accident,
+        [Display(Name = "Procedura")]
         Procedure,
     }
 }

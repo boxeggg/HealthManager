@@ -20,23 +20,23 @@
                 <tbody>
                     <tr>
                         <th scope="row" style="background-color: #ff8c00;">Puls</th>
-                        <td style="background-color: #add8e6; color: #000080;">@(Model.PulseValue == -1 ? "Brak" : Model.PulseValue.ToString())</td>
+                        <td style="background-color: #add8e6; color: #000080;">@(Model.PulseValue == -1 ? "Brak" : (Model.PulseValue.ToString() + " BPM"))  </td>
                     </tr>
                     <tr>
                         <th scope="row" style="background-color: #ff8c00;">Saturacja</th>
-                        <td style="background-color: #add8e6; color: #000080;">@(Model.SaturationValue == -1 ? "Brak" : Model.SaturationValue.ToString())</td>
+                        <td style="background-color: #add8e6; color: #000080;">@(Model.SaturationValue == -1 ? "Brak" : Model.SaturationValue.ToString() + "%")</td>
                     </tr>
                     <tr>
                         <th scope="row" style="background-color: #ff8c00;">Waga</th>
-                        <td style="background-color: #add8e6; color: #000080;">@(Model.WeightValue == -1 ? "Brak" : Model.WeightValue.ToString())</td>
+                        <td style="background-color: #add8e6; color: #000080;">@(Model.WeightValue == -1 ? "Brak" : Model.WeightValue.ToString() + " KG")</td>
                     </tr>
                     <tr>
                         <th scope="row" style="background-color: #ff8c00;">Wzrost</th>
-                        <td style="background-color: #add8e6; color: #000080;">@(Model.HeightValue == -1 ? "Brak" : Model.HeightValue.ToString())</td>
+                        <td style="background-color: #add8e6; color: #000080;">@(Model.HeightValue == -1 ? "Brak" : Model.HeightValue.ToString() + " CM")</td>
                     </tr>
                     <tr>
                         <th scope="row" style="background-color: #ff8c00;">Poziom glukozy</th>
-                        <td style="background-color: #add8e6; color: #000080;">@(Model.GlucoseValue == -1 ? "Brak" : Model.GlucoseValue.ToString())</td>
+                        <td style="background-color: #add8e6; color: #000080;">@(Model.GlucoseValue == -1 ? "Brak" : Model.GlucoseValue.ToString() + " MG/dL")</td>
                     </tr>
                 </tbody>
             </table>
