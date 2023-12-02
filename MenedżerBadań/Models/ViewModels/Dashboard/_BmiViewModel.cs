@@ -1,6 +1,6 @@
 ﻿using HealthManager.Data.Entities;
 
-namespace HealthManager.Models.ViewModels
+namespace HealthManager.Models.ViewModels.Dashboard
 {
     public class _BmiViewModel
     {

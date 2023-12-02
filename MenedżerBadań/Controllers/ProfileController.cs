@@ -1,11 +1,11 @@
 ﻿using HealthManager.Data.Entities;
-using HealthManager.Models.ViewModels;
 using HealthManager.Repositories;
 using HealthManager.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.AspNetCore.Authorization;
+using HealthManager.Models.ViewModels;
 
 namespace HealthManager.Controllers
 {

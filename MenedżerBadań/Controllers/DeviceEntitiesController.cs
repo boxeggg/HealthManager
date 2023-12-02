@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HealthManager.Data;
 using HealthManager.Data.Entities;
-using HealthManager.Models.ViewModels;
 using HealthManager.Repositories;
+using HealthManager.Models.ViewModels;
 
 namespace HealthManager.Controllers
 {

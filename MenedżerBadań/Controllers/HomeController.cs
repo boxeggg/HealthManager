@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using HealthManager.Data.Entities;
 using HealthManager.Repositories;
+using HealthManager.Models.ViewModels.Dashboard;
 
 namespace MenedżerBadań.Controllers
 {
