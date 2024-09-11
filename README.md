@@ -2,6 +2,8 @@
 
 This project is an ASP.NET MVC (.NET 7) web application designed to store and manage medical test results. It also allows users to associate these results with specific devices and customize their profiles.
 
+The app, developed during my internship, is available in Polish
+
 ## Features
 
 - **Test Results Management**: Add, edit, and view medical test results.
@@ -11,6 +13,7 @@ This project is an ASP.NET MVC (.NET 7) web application designed to store and ma
 ## Technologies
 
 - ASP.NET MVC (Version 7)
+- ASP.NET Identity
 - Entity Framework Core
 - SQL Server (for database)
 - HTML, CSS, JavaScript (Frontend)
@@ -19,16 +22,16 @@ This project is an ASP.NET MVC (.NET 7) web application designed to store and ma
 ## Screenshots
 
 1. **Main Dashboard Panel**
-   ![Main Dashboard](path_to_image/main_dashboard.webp)
+   ![Main Dashboard](panel.webp)
 
 2. **User Registration Panel**
-   ![Registration Panel](path_to_image/registration_panel.webp)
+   ![Registration Panel](profile.webp)
 
 3. **Measurement Results Overview**
-   ![Measurement Results](path_to_image/measurement_results.webp)
+   ![Measurement Results](pomiary.webp)
 
 4. **Device Connection Settings**
-   ![Device Settings](path_to_image/device_settings.webp)
+   ![Device Settings](urządzenia.webp)
 
 ## Requirements
 
